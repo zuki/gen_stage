@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2017-03-06 11:20+0900\n"
+"Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. TRANSLATORS: Elixir.GenStage.DemandDispatcher Summary
+#: lib/gen_stage/demand_dispatcher.ex:2
+msgid ""
+"A dispatcher that sends batches to the highest demand.\n"
+"\n"
+"This is the default dispatcher used by `GenStage`. In order\n"
+"to avoid greedy consumers, it is recommended that all consumers\n"
+"have exactly the same maximum demand.\n"
+msgstr ""
