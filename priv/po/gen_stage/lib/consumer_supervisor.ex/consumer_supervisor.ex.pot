@@ -1,5 +1,5 @@
 #. TRANSLATORS: @callback init/1
-#: lib/consumer_supervisor.ex:72 
+#: lib/consumer_supervisor.ex:71 
 msgid ""
 "Callback invoked to start the supervisor and during hot code upgrades.\n"
 "\n"
@@ -14,20 +14,12 @@ msgid ""
 "  * `:max_seconds` - the time frame in which `:max_restarts` applies\n"
 "    in seconds. Defaults to 5 seconds.\n"
 "\n"
-"  * `:max_dynamic` - the maximum number of children started under the\n"
-"    supervisor via `start_child/2`. Defaults to infinity children.\n"
-"\n"
 "  * `:subscribe_to` - a list of producers to subscribe to. Each element\n"
 "    represents the producer or a tuple with the producer and the subscription\n"
 "    options. e.g. `[Producer]` or `[{Producer, max_demand: 10, min_demand: 20}]`\n"
 msgstr ""
-#. TRANSLATORS: @type options
-#: lib/consumer_supervisor.ex:64 
-msgid ""
-"Options used by the `start*` functions"
-msgstr ""
 #. TRANSLATORS: def ConsumerSupervisor.count_children(supervisor)
-#: lib/consumer_supervisor.ex:213 
+#: lib/consumer_supervisor.ex:211 
 msgid ""
 "Returns a map containing count values for the supervisor.\n"
 "\n"
@@ -45,8 +37,13 @@ msgid ""
 "    is still alive\n"
 "\n"
 msgstr ""
+#. TRANSLATORS: @type options
+#: lib/consumer_supervisor.ex:64 
+msgid ""
+"Options used by the `start*` functions"
+msgstr ""
 #. TRANSLATORS: def ConsumerSupervisor.start_link(mod, args, opts \\ [])
-#: lib/consumer_supervisor.ex:133 
+#: lib/consumer_supervisor.ex:128 
 msgid ""
 "Starts a consumer supervisor module with the given `arg`.\n"
 "\n"
@@ -64,24 +61,6 @@ msgid ""
 "The `:name` option can also be given in order to register a supervisor\n"
 "name, the supported values are described under the `Name Registration`\n"
 "section in the `GenServer` module docs.\n"
-msgstr ""
-#. TRANSLATORS: def ConsumerSupervisor.start_link(children, options)
-#: lib/consumer_supervisor.ex:108 
-msgid ""
-"Starts a supervisor with the given children.\n"
-"\n"
-"A strategy is required to be given as an option. Furthermore,\n"
-"the `:max_restarts`, `:max_seconds`, `:max_dynamic` and `:subscribe_to`\n"
-"values can be configured as described in the documentation for the\n"
-"`c:init/1` callback.\n"
-"\n"
-"The options can also be used to register a supervisor name.\n"
-"The supported values are described under the `Name Registration`\n"
-"section in the `GenServer` module docs.\n"
-"\n"
-"Note that the consumer supervisor is linked to the parent process\n"
-"and will exit not only on crashes but also if the parent process\n"
-"exits with `:normal` reason.\n"
 msgstr ""
 #. TRANSLATORS: Elixir.ConsumerSupervisor Summary
 #: lib/consumer_supervisor.ex:2 
@@ -145,12 +124,15 @@ msgid ""
 "Read more about it in the `GenServer` docs.\n"
 msgstr ""
 #. TRANSLATORS: def ConsumerSupervisor.start_child(supervisor, args)
-#: lib/consumer_supervisor.ex:156 
+#: lib/consumer_supervisor.ex:151 
 msgid ""
 "Starts a child in the consumer supervisor.\n"
 "\n"
 "The child process will be started by appending the given list of\n"
 "`args` to the existing function arguments in the child specification.\n"
+"\n"
+"This child is started separately from any producer and does not\n"
+"count towards the demand of any of them.\n"
 "\n"
 "If the child process starts, function returns `{:ok, child}` or\n"
 "`{:ok, child, info}`, the pid is added to the supervisor and the\n"
@@ -161,8 +143,26 @@ msgid ""
 "`:ignore` or `{:error, error}` where `error` is a term containing\n"
 "information about the error is returned.\n"
 msgstr ""
+#. TRANSLATORS: def ConsumerSupervisor.start_link(children, options)
+#: lib/consumer_supervisor.ex:103 
+msgid ""
+"Starts a supervisor with the given children.\n"
+"\n"
+"A strategy is required to be given as an option. Furthermore,\n"
+"the `:max_restarts`, `:max_seconds`, and `:subscribe_to`\n"
+"values can be configured as described in the documentation for the\n"
+"`c:init/1` callback.\n"
+"\n"
+"The options can also be used to register a supervisor name.\n"
+"The supported values are described under the `Name Registration`\n"
+"section in the `GenServer` module docs.\n"
+"\n"
+"Note that the consumer supervisor is linked to the parent process\n"
+"and will exit not only on crashes but also if the parent process\n"
+"exits with `:normal` reason.\n"
+msgstr ""
 #. TRANSLATORS: def ConsumerSupervisor.terminate_child(supervisor, pid)
-#: lib/consumer_supervisor.ex:176 
+#: lib/consumer_supervisor.ex:174 
 msgid ""
 "Terminates the given child pid.\n"
 "\n"
@@ -170,7 +170,7 @@ msgid ""
 "such pid, the function returns `{:error, :not_found}`.\n"
 msgstr ""
 #. TRANSLATORS: def ConsumerSupervisor.which_children(supervisor)
-#: lib/consumer_supervisor.ex:187 
+#: lib/consumer_supervisor.ex:185 
 msgid ""
 "Returns a list with information about all children.\n"
 "\n"

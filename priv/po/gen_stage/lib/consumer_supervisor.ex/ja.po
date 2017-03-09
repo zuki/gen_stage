@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2017-03-09 10:34+0900\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-03-09 16:12+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -9,11 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"POT-Creation-Date: \n"
 "X-Generator: Poedit 1.8.12\n"
 
 #. TRANSLATORS: @callback init/1
-#: lib/consumer_supervisor.ex:72
+#: lib/consumer_supervisor.ex:71
 msgid ""
 "Callback invoked to start the supervisor and during hot code upgrades.\n"
 "\n"
@@ -27,9 +27,6 @@ msgid ""
 "\n"
 "  * `:max_seconds` - the time frame in which `:max_restarts` applies\n"
 "    in seconds. Defaults to 5 seconds.\n"
-"\n"
-"  * `:max_dynamic` - the maximum number of children started under the\n"
-"    supervisor via `start_child/2`. Defaults to infinity children.\n"
 "\n"
 "  * `:subscribe_to` - a list of producers to subscribe to. Each element\n"
 "    represents the producer or a tuple with the producer and the "
@@ -51,21 +48,13 @@ msgstr ""
 "  * `:max_seconds` - `:max_restarts`に適用される秒単位の時間間隔です。\n"
 "    デフォルトは5秒です。\n"
 "\n"
-"  * `:max_dynamic` - 監視下で`start_child/2`により起動できる子プロセスの\n"
-"    最大数です。デフォルトは無限です。\n"
-"\n"
 "  * `:subscribe_to` - 購読する生産者のリストです。リストの各要素は生産"
 "者、\n"
 "    または生産者と購読オプションからなるタプルのいずれかです。たとえば、\n"
 "    `[Producer]`または`[{Producer, max_demand: 10, min_demand: 20}]`。\n"
 
-#. TRANSLATORS: @type options
-#: lib/consumer_supervisor.ex:64
-msgid "Options used by the `start*` functions"
-msgstr "`start*`関数で使われるオプション"
-
 #. TRANSLATORS: def ConsumerSupervisor.count_children(supervisor)
-#: lib/consumer_supervisor.ex:213
+#: lib/consumer_supervisor.ex:211
 msgid ""
 "Returns a map containing count values for the supervisor.\n"
 "\n"
@@ -105,8 +94,13 @@ msgstr ""
 "    問わない。\n"
 "\n"
 
+#. TRANSLATORS: @type options
+#: lib/consumer_supervisor.ex:64
+msgid "Options used by the `start*` functions"
+msgstr "`start*`関数で使われるオプション"
+
 #. TRANSLATORS: def ConsumerSupervisor.start_link(mod, args, opts \\ [])
-#: lib/consumer_supervisor.ex:133
+#: lib/consumer_supervisor.ex:128
 msgid ""
 "Starts a consumer supervisor module with the given `arg`.\n"
 "\n"
@@ -147,41 +141,6 @@ msgstr ""
 "サポートされている値は、`GenServer`モジュールのドキュメントの「名前の登録」"
 "に\n"
 "記載されています。\n"
-
-#. TRANSLATORS: def ConsumerSupervisor.start_link(children, options)
-#: lib/consumer_supervisor.ex:108
-msgid ""
-"Starts a supervisor with the given children.\n"
-"\n"
-"A strategy is required to be given as an option. Furthermore,\n"
-"the `:max_restarts`, `:max_seconds`, `:max_dynamic` and `:subscribe_to`\n"
-"values can be configured as described in the documentation for the\n"
-"`c:init/1` callback.\n"
-"\n"
-"The options can also be used to register a supervisor name.\n"
-"The supported values are described under the `Name Registration`\n"
-"section in the `GenServer` module docs.\n"
-"\n"
-"Note that the consumer supervisor is linked to the parent process\n"
-"and will exit not only on crashes but also if the parent process\n"
-"exits with `:normal` reason.\n"
-msgstr ""
-"指定した子プロセスを持つスーパーバイザを起動します。\n"
-"\n"
-"戦略をオプションで指定する必要があります。さらに、`c:init/1`コールバック"
-"の\n"
-"ドキュメントに記載されているように`:max_restarts`、`:max_seconds`、\n"
-"`:max_dynamic`、`:subscribe_to`の値をオプションで構成することができます。\n"
-"\n"
-"オプションを使って、スーパーバイザの名前を登録することもできます。サポー"
-"ト\n"
-"されている値は、`GenServer`モジュールのドキュメントの「名前の登録」に\n"
-"記載されています。\n"
-"\n"
-"消費者スーパーバイザは親プロセスにリンクされており、親プロセスがクラッシュ"
-"した\n"
-"場合だけでなく、`;normal`理由で終了した場合も、終了することに注意してくださ"
-"い。\n"
 
 #. TRANSLATORS: Elixir.ConsumerSupervisor Summary
 #: lib/consumer_supervisor.ex:2
@@ -319,12 +278,15 @@ msgstr ""
 "ドキュメントを参照してください。\n"
 
 #. TRANSLATORS: def ConsumerSupervisor.start_child(supervisor, args)
-#: lib/consumer_supervisor.ex:156
+#: lib/consumer_supervisor.ex:151
 msgid ""
 "Starts a child in the consumer supervisor.\n"
 "\n"
 "The child process will be started by appending the given list of\n"
 "`args` to the existing function arguments in the child specification.\n"
+"\n"
+"This child is started separately from any producer and does not\n"
+"count towards the demand of any of them.\n"
 "\n"
 "If the child process starts, function returns `{:ok, child}` or\n"
 "`{:ok, child, info}`, the pid is added to the supervisor and the\n"
@@ -340,6 +302,9 @@ msgstr ""
 "子プロセスは、子プロセス仕様に書かれている既存の関数引数に、指定した\n"
 "引数のリスト`args`を追加して起動されます。\n"
 "\n"
+"この子プロセスは生産者とは独立に起動され、いずれかの生産者の要求には\n"
+"カウントされません。\n"
+"\n"
 "子プロセスが起動して、関数が`{:ok, child}`または`{:ok, child, info}`を返し"
 "た\n"
 "場合、pidはスーパーバイザに追加され、この関数は同じ値を返します。\n"
@@ -350,8 +315,43 @@ msgstr ""
 "error}`を\n"
 "返します。ここで、`error`はエラーに関する情報を含む項です。\n"
 
+#. TRANSLATORS: def ConsumerSupervisor.start_link(children, options)
+#: lib/consumer_supervisor.ex:103
+msgid ""
+"Starts a supervisor with the given children.\n"
+"\n"
+"A strategy is required to be given as an option. Furthermore,\n"
+"the `:max_restarts`, `:max_seconds`, and `:subscribe_to`\n"
+"values can be configured as described in the documentation for the\n"
+"`c:init/1` callback.\n"
+"\n"
+"The options can also be used to register a supervisor name.\n"
+"The supported values are described under the `Name Registration`\n"
+"section in the `GenServer` module docs.\n"
+"\n"
+"Note that the consumer supervisor is linked to the parent process\n"
+"and will exit not only on crashes but also if the parent process\n"
+"exits with `:normal` reason.\n"
+msgstr ""
+"指定した子プロセスを持つスーパーバイザを起動します。\n"
+"\n"
+"戦略をオプションで指定する必要があります。さらに、`c:init/1`コールバック"
+"の\n"
+"ドキュメントに記載されているように`:max_restarts`、`:max_seconds`、\n"
+"`:max_dynamic`、`:subscribe_to`の値をオプションで構成することができます。\n"
+"\n"
+"オプションを使って、スーパーバイザの名前を登録することもできます。サポー"
+"ト\n"
+"されている値は、`GenServer`モジュールのドキュメントの「名前の登録」に\n"
+"記載されています。\n"
+"\n"
+"消費者スーパーバイザは親プロセスにリンクされており、親プロセスがクラッシュ"
+"した\n"
+"場合だけでなく、`;normal`理由で終了した場合も、終了することに注意してくださ"
+"い。\n"
+
 #. TRANSLATORS: def ConsumerSupervisor.terminate_child(supervisor, pid)
-#: lib/consumer_supervisor.ex:176
+#: lib/consumer_supervisor.ex:174
 msgid ""
 "Terminates the given child pid.\n"
 "\n"
@@ -364,7 +364,7 @@ msgstr ""
 "存在しない場合、この関数は`{:error, :not_found}`を返します。\n"
 
 #. TRANSLATORS: def ConsumerSupervisor.which_children(supervisor)
-#: lib/consumer_supervisor.ex:187
+#: lib/consumer_supervisor.ex:185
 msgid ""
 "Returns a list with information about all children.\n"
 "\n"

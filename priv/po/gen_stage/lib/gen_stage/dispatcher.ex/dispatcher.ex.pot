@@ -1,8 +1,3 @@
-#. TRANSLATORS: @callback subscribe/3
-#: lib/gen_stage/dispatcher.ex:37 
-msgid ""
-"Called every time the producer gets a new subscriber.\n"
-msgstr ""
 #. TRANSLATORS: @callback notify/2
 #: lib/gen_stage/dispatcher.ex:93 
 msgid ""
@@ -14,6 +9,11 @@ msgid ""
 "as the consumers are all monitored by the producer. For example:\n"
 "\n"
 "    Process.send(consumer, {consumer_ref, msg}, [:noconnect])\n"
+msgstr ""
+#. TRANSLATORS: @callback subscribe/3
+#: lib/gen_stage/dispatcher.ex:37 
+msgid ""
+"Called every time the producer gets a new subscriber.\n"
 msgstr ""
 #. TRANSLATORS: @callback dispatch/3
 #: lib/gen_stage/dispatcher.ex:65 
