@@ -4,3 +4,6 @@
 /doc
 erl_crash.dump
 *.ez
+*.pot_db
+priv/lang
+
